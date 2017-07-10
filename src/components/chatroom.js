@@ -28,7 +28,8 @@ export default class ChatRoom extends Component {
   sendMessage() {
     const next_message = {
       id: this.state.messages.length,
-      message: this.state.message
+      user_name: this.props.username,
+      message: this.state.message,
     }
 
     firebase.database().ref('messages/'+ next_message.id).set(next_message);
@@ -40,15 +41,16 @@ export default class ChatRoom extends Component {
   render() {
     var currentMessages = this.state.messages.map((message, index) => {
       return (
-        <li key={index}>
-          {message.message}
+        <li key={index} style={{paddingBottom: 10}}>
+          <span style={{fontWeight: 'bold'}}> {message.user_name + ': '} </span> {message.message}
         </li>
       )
     });
 
     return(
-      <div>
-        <ul>
+      <div style={{padding: 30}}>
+        <h3 style={{textAlign: 'center'}}> CHAT ROOM </h3>
+        <ul style={{listStyle: 'none', padding: 0}}>
           { currentMessages }
         </ul>
         <textarea type="text" placeholder="Enter Message" onChange= { this.updateMessage } />
