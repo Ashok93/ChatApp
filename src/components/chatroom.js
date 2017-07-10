@@ -32,14 +32,6 @@ export default class ChatRoom extends Component {
     }
 
     firebase.database().ref('messages/'+ next_message.id).set(next_message);
-
-
-    //var message_list = Object.assign([], this.state.messages);
-    //message_list.push(next_message);
-
-    //this.setState({
-      //messages: message_list
-    //})
   }
   updateMessage(event) {
     this.setState({message: event.target.value});
